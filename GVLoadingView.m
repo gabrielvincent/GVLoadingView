@@ -17,8 +17,8 @@
 
 @implementation GVLoadingView
 @synthesize delegate, reloadMethod;
-@synthesize message, messageLabelFont, messageLabel, messageLabelShadowColor, messageLabelShadowOffset, messageLabelColor;
-@synthesize spinnerColor;
+@synthesize messageLabel;
+@synthesize spinner;
 @synthesize animationTime;
 @synthesize reloadImage;
 
@@ -27,6 +27,8 @@
     self = [super initWithFrame:frame];
     if (self) {
 		finalFrame = frame;
+		messageLabel = [[UILabel alloc] init];
+		spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     }
     return self;
 }
@@ -35,6 +37,8 @@
 	self = [super init];
     if (self) {
 		isFirstCall = YES;
+		messageLabel = [[UILabel alloc] init];
+		spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     }
     return self;
 }
@@ -44,8 +48,6 @@
 	[super setFrame:frame];
     if (!CGRectIsNull(frame) && isFirstCall) {
 		finalFrame = frame;
-		
-		NSLog(@"X: %.0f | Y: %.0f | Width: %.0f | Height: %.0f", finalFrame.origin.x, finalFrame.origin.y, finalFrame.size.width, finalFrame.size.height);
 		isFirstCall = NO;
 	}
 }
@@ -55,23 +57,13 @@
 	// View configuration
     
 	// Message label configuration
-    messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, Width, Height)];
+    messageLabel.frame = CGRectMake(0, 0, Width, Height);
     messageLabel.backgroundColor = [UIColor clearColor];
-    messageLabel.textColor = [UIColor whiteColor];
     messageLabel.textAlignment = UITextAlignmentCenter;
-    messageLabel.shadowColor = [UIColor blackColor];
-    messageLabel.shadowOffset = CGSizeMake(0, -1);
-    messageLabel.text = message;
-	messageLabel.font = messageLabelFont;
-	messageLabel.shadowOffset = messageLabelShadowOffset;
-	messageLabel.shadowColor = messageLabelShadowColor;
-	messageLabel.textColor = messageLabelColor;
 	
 	// Activity Indicator View configuration
-	spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
 	spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-	spinner.color = spinnerColor;
-	spinner.center = CGPointMake(20, self.frame.size.height/2);
+	spinner.center = CGPointMake(20, Height/2);
 	
 	[self addSubview:messageLabel];
 	[self addSubview:spinner];
@@ -82,9 +74,7 @@
 	
 	messageLabel.text = reloadMessage;
 	
-	spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
 	spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-	spinner.color = spinnerColor;
 	spinner.center = CGPointMake(20, self.frame.size.height/2);
 	[spinner startAnimating];
 	

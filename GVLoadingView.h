@@ -32,7 +32,6 @@ typedef enum {
 @interface GVLoadingView : UIView <GVLoadingViewDelegate> {
 	CGRect finalFrame;
 	__unsafe_unretained UIViewController <GVLoadingViewDelegate> *delegate;
-	UIActivityIndicatorView *spinner;
 	UIButton *reloadButton;
 	UITapGestureRecognizer *reloadTapGesture;
 	BOOL isFirstCall;
@@ -42,15 +41,10 @@ typedef enum {
 @property (nonatomic) SEL reloadMethod;
 
 // Message label
-@property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) UILabel *messageLabel;
-@property (nonatomic) CGSize messageLabelShadowOffset;
-@property (nonatomic, strong) UIColor *messageLabelShadowColor;
-@property (nonatomic, strong) UIFont *messageLabelFont;
-@property (nonatomic, strong) UIColor *messageLabelColor;
 
 // Activity indicator view
-@property (nonatomic, strong) UIColor *spinnerColor;
+@property (nonatomic, strong) UIActivityIndicatorView *spinner;
 
 // View
 @property (nonatomic) CGFloat animationTime;

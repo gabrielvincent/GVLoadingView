@@ -30,6 +30,26 @@
     }
     return self;
 }
+
+- (id) init {
+	self = [super init];
+    if (self) {
+		isFirstCall = YES;
+    }
+    return self;
+}
+
+- (void)setFrame:(CGRect)frame
+{
+	[super setFrame:frame];
+    if (!CGRectIsNull(frame) && isFirstCall) {
+		finalFrame = frame;
+		
+		NSLog(@"X: %.0f | Y: %.0f | Width: %.0f | Height: %.0f", finalFrame.origin.x, finalFrame.origin.y, finalFrame.size.width, finalFrame.size.height);
+		isFirstCall = NO;
+	}
+}
+
 - (void)drawRect:(CGRect)rect
 {
 	// View configuration
@@ -110,7 +130,7 @@
 			self.frame = CGRectMake(self.frame.origin.x, SuperviewHeight-Height, Width, 0);
 		}
 		else if (animation == GVLoadingViewShowAnimationDrop) {
-			self.frame = CGRectMake(OriginX, OriginY-80, Width, Height);
+			self.frame = CGRectMake(OriginX, finalFrame.origin.y-40, Width, Height);
 			self.alpha = 0.0;
 		}
 		
@@ -123,16 +143,16 @@
 			if (animation == GVLoadingViewShowAnimationDrop) {
 				
 				[UIView animateWithDuration:animationTime animations:^{ 
-					self.frame = CGRectMake(OriginX, OriginY-7, Width, Height-8);
+					self.frame = CGRectMake(OriginX, OriginY-7, Width, Height+4);
 				} completion:^(BOOL finished) {
 					[UIView animateWithDuration:animationTime animations:^{ 
-						self.frame = CGRectMake(OriginX, OriginY+7, Width, Height+8);
+						self.frame = CGRectMake(OriginX, OriginY+7, Width, Height-4);
 					} completion:^(BOOL finished) {
 						[UIView animateWithDuration:animationTime animations:^{ 
-							self.frame = CGRectMake(OriginX, OriginY-1, Width, Height-2);
+							self.frame = CGRectMake(OriginX, OriginY-2, Width, Height+2);
 						} completion:^(BOOL finished) {
 							[UIView animateWithDuration:animationTime animations:^{ 
-								self.frame = CGRectMake(OriginX, OriginY+1, Width, Height+2);
+								self.frame = CGRectMake(OriginX, OriginY+2, Width, Height-2);
 							}];
 						}];
 					}];

@@ -35,6 +35,7 @@ typedef enum {
 	UIActivityIndicatorView *spinner;
 	UIButton *reloadButton;
 	UITapGestureRecognizer *reloadTapGesture;
+	BOOL isFirstCall;
 }
 
 @property (nonatomic, unsafe_unretained) UIViewController <GVLoadingViewDelegate> *delegate;

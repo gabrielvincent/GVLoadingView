@@ -73,7 +73,6 @@
 	
 	messageLabel.text = reloadMessage;
 	
-	spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
 	spinner.center = CGPointMake(20, self.frame.size.height/2);
 	[spinner startAnimating];
 	

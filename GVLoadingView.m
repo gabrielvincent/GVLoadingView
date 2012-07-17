@@ -62,7 +62,6 @@
     messageLabel.textAlignment = UITextAlignmentCenter;
 	
 	// Activity Indicator View configuration
-	spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
 	spinner.center = CGPointMake(20, Height/2);
 	
 	[self addSubview:messageLabel];

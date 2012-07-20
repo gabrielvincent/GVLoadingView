@@ -60,7 +60,7 @@ This is the <code>UIActivityIndicatorView</code> that will appear to the left of
 <code>loadingView.spinner.color = [UIColor darkGrayColor];</code><br>
 
 <pre>@property (nonatomic) CGFloat *animationTime;</pre>
-A <code>float</code> value that defines the time that will take for the animations to complete. It ranges from 0.0 to 1.0.
+A <code>float</code> value that defines the time in seconds that will take for the animations to complete.
 
 <pre>@property (nonatomic, strong) UIImage *reloadImage;</pre>
 This is the <code>UIImage</code> that will appear in place of the <code>UIActivityIndicatorView</code> when GVLoadingView enters reload mode. This image must be 20x23 pixels size on non-retine devices and 40x46 on retina devices.
